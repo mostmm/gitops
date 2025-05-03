@@ -1,0 +1,15 @@
+defaults:
+  project: local
+  server: https://kubernetes.default.svc
+  namespace: argocd
+  selfHeal: true
+  prune: true
+
+charts:
+  mock-app:
+    namespace: mock-app
+    name: mock-app
+    repoUrl: https://github.com/mostmm/gitops.git
+    envs:
+      local:
+        enabled: true

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-chart
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-status.github: ""
+spec:
+  project: local
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true # dev only
+      allowEmpty: true
+      selfHeal: true # dev only  
+  source:
+    path: "root-chart"
+    repoURL: https://github.com/mostmm/gitops.git
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+    # directory:
+    #   recurse: true

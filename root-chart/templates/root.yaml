@@ -1,0 +1,31 @@
+{{- range $chartIndex, $chart := .Values.charts }}
+{{- range $envIndex, $env := $chart.envs }}
+{{- if $env.enabled }}
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $chart.name }}
+  namespace: {{ $.Values.defaults.namespace }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-status.github: ""
+spec:
+  project: {{ $.Values.defaults.project }}
+  destination:
+    server: {{ $.Values.defaults.server }}
+    namespace: {{ $chart.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: {{ $chart.selfHeal | default $.Values.defaults.selfHeal }}
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: {{ $chart.repoUrl }}
+    path: "{{ $chart.path | default $chart.name }}/{{ $envIndex }}"
+
+{{- end }}
+{{- end }}
+{{- end }}
