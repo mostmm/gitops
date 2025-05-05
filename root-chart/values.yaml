@@ -22,4 +22,4 @@ apps:
         enabled: true
         values:
           ServiceMonitor:
-            release: kube-prometheus
+            release: prometheus
