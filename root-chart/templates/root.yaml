@@ -24,7 +24,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: {{ $app.repoUrl }}
-    path: "{{ $app.path | default $app.name }}/{{ $envIndex }}"
+    path: "{{ $app.path | default $app.name }}"
     targetRevision: "ft/charted"
     helm:
       values: |
