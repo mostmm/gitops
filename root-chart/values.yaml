@@ -12,16 +12,14 @@ apps:
     repoUrl: https://github.com/mostmm/gitops.git
 
     envs:
-      local:
+      test:
         enabled: true
         values:
-          # env: local
           ServiceMonitor:
             release: prometheus
 
-      local-2:
+      prod:
         enabled: true
         values:
-          # env: local-2
           ServiceMonitor:
             release: kube-prometheus
