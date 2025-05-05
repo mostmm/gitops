@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: fastapi-app
   labels:
-    release: {{- toYaml (index $.Values.apps $app.name).$env.ServiceMonitor.release | nindent 8 }}
+    release: {{ .Values.ServiceMonitor.release }}
 spec:
   selector:
     matchLabels:
