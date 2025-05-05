@@ -6,4 +6,4 @@ metadata:
     grafana_dashboard: "1"
 data:
   fastapi-dashboard.json: |
-    {{ .Files.Get "../files/fastapi-dashboard.json" | indent 4 }}
+    {{ .Files.Get "files/fastapi-dashboard.json" | indent 4 }}
