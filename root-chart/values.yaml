@@ -5,7 +5,7 @@ defaults:
   selfHeal: true
   prune: true
 
-charts:
+apps:
   mock-app:
     namespace: mock-app
     name: mock-app
@@ -13,3 +13,6 @@ charts:
     envs:
       local:
         enabled: true
+        values:
+          ServiceMonitor:
+            release: prometheus

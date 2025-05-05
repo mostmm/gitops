@@ -1,11 +1,11 @@
-{{- range $chartIndex, $chart := .Values.charts }}
-{{- range $envIndex, $env := $chart.envs }}
+{{- range $chartIndex, $app := .Values.apps }}
+{{- range $envIndex, $env := $app.envs }}
 {{- if $env.enabled }}
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ $chart.name }}
+  name: {{ $app.name }}
   namespace: {{ $.Values.defaults.namespace }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -15,16 +15,20 @@ spec:
   project: {{ $.Values.defaults.project }}
   destination:
     server: {{ $.Values.defaults.server }}
-    namespace: {{ $chart.namespace }}
+    namespace: {{ $app.namespace }}
   syncPolicy:
     automated:
       prune: true
-      selfHeal: {{ $chart.selfHeal | default $.Values.defaults.selfHeal }}
+      selfHeal: {{ $app.selfHeal | default $.Values.defaults.selfHeal }}
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: {{ $chart.repoUrl }}
-    path: "{{ $chart.path | default $chart.name }}/{{ $envIndex }}"
+    repoURL: {{ $app.repoUrl }}
+    path: "{{ $app.path | default $app.name }}/{{ $envIndex }}"
+    targetRevision: "ft/charted"
+    helm:
+      values: |
+        {{- toYaml $env.values | nindent 8 }}
 
 {{- end }}
 {{- end }}

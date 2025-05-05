@@ -18,7 +18,7 @@ spec:
   source:
     path: "root-chart"
     repoURL: https://github.com/mostmm/gitops.git
-    targetRevision: HEAD
+    targetRevision: "ft/charted"
     helm:
       valueFiles:
         - values.yaml
