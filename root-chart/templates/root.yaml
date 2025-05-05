@@ -1,11 +1,12 @@
 {{- range $chartIndex, $app := .Values.apps }}
 {{- range $envIndex, $env := $app.envs }}
 {{- if $env.enabled }}
+---
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ $app.name }}
+  name: "{{ $app.name }}-{{ $envIndex }}"
   namespace: {{ $.Values.defaults.namespace }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -15,7 +16,7 @@ spec:
   project: {{ $.Values.defaults.project }}
   destination:
     server: {{ $.Values.defaults.server }}
-    namespace: {{ $app.namespace }}
+    namespace: "{{ $app.namespace }}-{{ $envIndex }}"
   syncPolicy:
     automated:
       prune: true
@@ -28,6 +29,7 @@ spec:
     targetRevision: "ft/charted"
     helm:
       values: |
+        env: {{ $envIndex }}
         {{- toYaml $env.values | nindent 8 }}
 
 {{- end }}

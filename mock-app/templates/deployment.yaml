@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastapi-app
+  name: fastapi-app-{{ .Values.env }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastapi-app
+      app: fastapi-app-{{ .Values.env }}
   template:
     metadata:
       labels:
-        app: fastapi-app
+        app: fastapi-app-{{ .Values.env }}
     spec:
       containers:
-      - name: fastapi-app
+      - name: fastapi-app-{{ .Values.env }}
         image: rslim087/fastapi-prometheus:latest
         ports:
         - containerPort: 8000

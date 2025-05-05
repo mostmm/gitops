@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fastapi-app
+  name: fastapi-app-{{ .Values.env }}
   labels:
-    app: fastapi-app
+    app: fastapi-app-{{ .Values.env }}
 spec:
   selector:
-    app: fastapi-app
+    app: fastapi-app-{{ .Values.env }}
   ports:
   - port: 8000
     targetPort: 8000

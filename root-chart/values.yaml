@@ -10,9 +10,18 @@ apps:
     namespace: mock-app
     name: mock-app
     repoUrl: https://github.com/mostmm/gitops.git
+
     envs:
       local:
         enabled: true
         values:
+          # env: local
           ServiceMonitor:
             release: prometheus
+
+      local-2:
+        enabled: true
+        values:
+          # env: local-2
+          ServiceMonitor:
+            release: kube-prometheus
