@@ -1,13 +1,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: fastapi-app
+  name: fastapi-app-{{ .Values.env }}
   labels:
-    release: "prometheus"
+    release: {{ .Values.ServiceMonitor.release }}
 spec:
   selector:
     matchLabels:
-      app: fastapi-app
+      app: fastapi-app-{{ .Values.env }}
   endpoints:
   - port: web
     path: /metrics

@@ -12,15 +12,13 @@ spec:
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
-      prune: true # dev only
+      prune: true
       allowEmpty: true
-      selfHeal: true # dev only  
+      selfHeal: true
   source:
     path: "root-chart"
     repoURL: https://github.com/mostmm/gitops.git
-    targetRevision: HEAD
+    targetRevision: main
     helm:
       valueFiles:
         - values.yaml
-    # directory:
-    #   recurse: true
