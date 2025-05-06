@@ -256,7 +256,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "process_resident_memory_bytes{namespace=\"mock-app\"}",
+                    "expr": "process_resident_memory_bytes{namespace=\"mock-app-test\"}",
                     "interval": "",
                     "legendFormat": "Memory Usage",
                     "refId": "A"
