@@ -5,4 +5,4 @@ metadata:
   labels:
     grafana_dashboard: "1"
 data:
-{{ (.Files.Glob "files/fastapi-dashboard*.json").AsConfig | indent 2 }}
+{{ (.Files.Glob (printf "files/fastapi-dashboard%s.json" .Values.env)).AsConfig | indent 2 }}
