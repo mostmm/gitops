@@ -66,7 +66,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "rate(http_request_total[1m])",
+                    "expr": "rate(http_request_total{namespace=\"mock-app-test\"}[1m])",
                     "interval": "",
                     "legendFormat": "{{method}} {{path}}",
                     "refId": "A"
@@ -161,7 +161,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "rate(http_request_duration_seconds_sum[1m]) / rate(http_request_duration_seconds_count[1m])",
+                    "expr": "rate(http_request_duration_seconds_sum{namespace=\"mock-app-test\"}[1m]) / rate(http_request_duration_seconds_count{namespace=\"mock-app-test\"}[1m])",
                     "interval": "",
                     "legendFormat": "{{method}} {{path}}",
                     "refId": "A"
@@ -351,7 +351,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "process_cpu_usage",
+                    "expr": "process_cpu_usage{namespace=\"mock-app-test\"}",
                     "interval": "",
                     "legendFormat": "CPU Usage",
                     "refId": "A"
